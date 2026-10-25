@@ -11,7 +11,7 @@ Hands-on labs I build to practice real IT support and helpdesk tasks. Each lab i
 |---|-----|--------|--------|
 | 01 | [Active Directory home lab](01-active-directory/) | Windows Server, AD DS, OUs, users and groups, GPO, DNS, share and NTFS permissions, RDP | ✅ Done |
 | 02 | [Microsoft Entra ID](02-entra-id/) | User lifecycle (onboarding, password reset, offboarding), MFA, sign-in log troubleshooting | ✅ Done |
-| 03 | Networking and email DNS | IP addressing, DNS, DHCP, ping, tracert, nslookup, VLANs in Packet Tracer, MX/SPF/DMARC records | ⬜ Planned |
+| 03 | [Networking and email DNS](03-networking/) | IP addressing, DNS, DHCP, ping, tracert, nslookup, VLANs in Packet Tracer, MX/SPF/DMARC records | 🟡 In progress |
 | 04 | Azure infrastructure | Virtual machines, virtual networks, NSGs, RDP, cost control | ⬜ Planned |
 | 05 | Ticketing and documentation | Ticket workflow, SLAs, knowledge base articles (osTicket) | ⬜ Planned |
 | 06 | PowerShell automation | Bulk user onboarding/offboarding and reports | ⬜ Planned |
