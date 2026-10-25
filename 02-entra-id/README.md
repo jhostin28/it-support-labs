@@ -49,18 +49,67 @@ The most common helpdesk ticket, end to end:
 
 ![Password change after reset](img/08-password-change-after-reset.png)
 
+## 5. Offboarding: "The employee left the company"
+
+1. **Disabled the account** (Account status → Account enabled: off) instead of deleting it, so the company keeps the user's data and the account can be restored if needed.
+2. **Revoked sessions** to sign the user out of every device.
+
+![Account disabled and sessions revoked](img/10-account-disabled-sessions-revoked.png)
+
+**Lesson learned:** Entra ID does not allow resetting the password of a disabled account. To test the block, I had to **re-enable the account, reset the password, and disable it again**, the same flow as an employee who is rehired and later leaves.
+
+![Cannot reset a disabled account](img/11-cannot-reset-disabled-account.png)
+
+![Re-enable and reset](img/12-reenable-and-reset.png)
+
+## 6. MFA with Microsoft Authenticator
+
+The tenant has **security defaults** enabled, so at sign-in the user was required to register Microsoft Authenticator. After registration, every sign-in needs approval on the phone.
+
+![MFA setup prompt](img/13-mfa-setup-prompt.png)
+
+![MFA QR code (blurred)](img/14-mfa-qr-code.png)
+
+![Authenticator added](img/15-authenticator-added.png)
+
+## 7. Verifying the block
+
+After disabling the account again and revoking sessions, the sign-in attempt was rejected:
+
+![Account locked](img/16-account-locked.png)
+
+## 8. Troubleshooting with sign-in logs
+
+When a user calls saying "I can't sign in", the first step is to check **what error they get**. A wrong password and a disabled account are different problems with different fixes.
+
+![Wrong password error](img/09-wrong-password-error.png)
+
+The **Sign-in logs** show every attempt with its error code:
+
+| Code | Meaning |
+|------|---------|
+| `0` | Successful sign-in |
+| `50126` | Invalid username or password |
+| `50055` | Password expired, the user must change it |
+| `50140` | "Stay signed in?" prompt (not an error) |
+| `50057` | Account is disabled |
+
+![Sign-in logs](img/17-sign-in-logs.png)
+
 ---
 
 ## What I learned
 
-- The full onboarding flow in Entra ID: create user, temporary password, forced change at first sign-in.
+- The full user lifecycle in Entra ID: onboarding, first sign-in, password reset, MFA, offboarding and reactivation.
 - Why **usage location** matters before assigning licenses.
 - A password reset is a security process, not just a click: identity verification comes first.
-- **Revoke sessions** signs a user out of all devices, which is used for compromised accounts and offboarding.
+- **Disable first, delete later:** offboarding keeps data available and allows rehiring.
+- **Revoke sessions** signs a user out of all devices, used for compromised accounts and offboarding.
+- How to read **sign-in logs** and error codes to troubleshoot login problems.
+- MFA QR codes are secrets and must never be shared.
 
 ## Next steps
 
-- [ ] Offboarding: block sign-in, revoke sessions, remove groups and licenses
 - [ ] Security groups and dynamic groups
-- [ ] MFA with security defaults and Microsoft Authenticator
-- [ ] Sign-in logs: troubleshoot a failed login
+- [ ] Self-service password reset (SSPR)
+- [ ] Conditional Access (Entra ID P2 trial)
