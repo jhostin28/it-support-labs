@@ -74,7 +74,7 @@ The tenant has **security defaults** enabled, so at sign-in the user was require
 
 ## 7. Verifying the block
 
-After disabling the account again and revoking sessions, the sign-in attempt was rejected:
+After disabling the account again and revoking sessions, the sign-in attempt was rejected and logged with error code `50057`:
 
 ![Account locked](img/16-account-locked.png)
 
